@@ -1,0 +1,25 @@
+{
+  "name": "Diego Ortega",
+  "navTitle": "MAXANDHISCAM",
+  "instagramHandle": "@max.andhiscam",
+  "instagramUrl": "https://instagram.com/max.andhiscam",
+  "youtubeHandle": "@max.andhiscam",
+  "youtubeUrl": "https://www.youtube.com/@max.andhiscam",
+  "email": "maxandhiscam@gmail.com",
+  "footerNote": "Available for editorial, portrait, and travel commissions.",
+  "seoTitle": "Diego Ortega — Photography",
+  "seoDescription": "Selected photography by Diego Ortega.",
+  "home": {
+    "heroImage": "",
+    "heroHeadline": "Diego Ortega",
+    "heroSubhead": "Photographer",
+    "aboutPreview": "Photographs about light, place, and the small choreography of the streets — editorial, portrait, and personal work.",
+    "featured": ["mexico"]
+  },
+  "contact": {
+    "headline": "Let's work together.",
+    "body": "For commissions, prints, or just to say hello — drop a line.",
+    "email": "maxandhiscam@gmail.com",
+    "availability": "Booking editorial + portrait through Q3."
+  }
+}

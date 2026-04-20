@@ -1,0 +1,133 @@
+{
+  "generatedAt": "2026-04-20T04:46:17.423Z",
+  "galleries": [
+    {
+      "slug": "mexico",
+      "title": "Mexico",
+      "order": 1,
+      "visible": true,
+      "cover": {
+        "name": "MEX05393",
+        "src": "/photos/mexico/MEX05393.jpg",
+        "width": 2400,
+        "height": 2400,
+        "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABgDASIAAhEBAxEB/8QAGQABAAIDAAAAAAAAAAAAAAAAAAIDAQQF/8QAIhAAAQQCAgEFAAAAAAAAAAAAAQACAxESIQRBgRQxUVJx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAIB/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDkvkHJkybx43YsxLRrz+rTweBQIomt/KulkIIe3FrpNnH2UPUPM5c51g/YXSq3WSYqDTdHVdFFJ8gdoDEdnsopUrBI8ikJs2iLBhERB//Z",
+        "alt": "MEX05393",
+        "sourceFile": "MEX05393.tif",
+        "order": 0
+      },
+      "images": [
+        {
+          "name": "MEX05393",
+          "src": "/photos/mexico/MEX05393.jpg",
+          "width": 2400,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABgDASIAAhEBAxEB/8QAGQABAAIDAAAAAAAAAAAAAAAAAAIDAQQF/8QAIhAAAQQCAgEFAAAAAAAAAAAAAQACAxESIQRBgRQxUVJx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAIB/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDkvkHJkybx43YsxLRrz+rTweBQIomt/KulkIIe3FrpNnH2UPUPM5c51g/YXSq3WSYqDTdHVdFFJ8gdoDEdnsopUrBI8ikJs2iLBhERB//Z",
+          "alt": "MEX05393",
+          "sourceFile": "MEX05393.tif",
+          "order": 0
+        },
+        {
+          "name": "MEX06291",
+          "src": "/photos/mexico/MEX06291.jpg",
+          "width": 1898,
+          "height": 2373,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAIDBAb/xAAhEAACAgEEAgMAAAAAAAAAAAABAgADERITITEEUUFhwf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A8rnPz1NqqkatrridIOAB2fuSjmomxAFKthTjnMs2O412OW55HswqdoNytVmD1gRI3HHAJA9BokBQ19unk5JJ/TNPLave01qVVQBhu8xEo5+4iIH/2Q==",
+          "alt": "MEX06291",
+          "sourceFile": "MEX06291.tif",
+          "order": 1
+        },
+        {
+          "name": "MEX06180",
+          "src": "/photos/mexico/MEX06180.jpg",
+          "width": 2400,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABgDASIAAhEBAxEB/8QAGQABAAIDAAAAAAAAAAAAAAAAAAQGAgMF/8QAIRAAAQQCAgIDAAAAAAAAAAAAAQACAwQFESExEhNBUcH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AKqptXHusVZrDnFrImk9d6Cj14JLMzYYht7ul27tirQxb8fDL7JnDT/EcA752fxFV9ERBvpWXU7Uc7eSw7I+x8hZ5Cu6CxvjwlHsYQdggoiCKiIg/9k=",
+          "alt": "MEX06180",
+          "sourceFile": "MEX06180.tif",
+          "order": 2
+        },
+        {
+          "name": "MEX06556",
+          "src": "/photos/mexico/MEX06556.jpg",
+          "width": 1920,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAAAAECBAX/xAAkEAABAwMEAQUAAAAAAAAAAAABAAIDBBEhEjFBUSITYXGRof/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A4lNCaqobHGA297k7BVfE3UW4NiRccrRT1kFNCz0zKXtaQLYaefLvKh8UjnOnp9Mkco6F2X3+MqKxOizgfqKxcWkh2m438giC1dSilDWa7nojJ9/u6yB2kEDlEVECyIiD/9k=",
+          "alt": "MEX06556",
+          "sourceFile": "MEX06556.tif",
+          "order": 3
+        },
+        {
+          "name": "MEX05339",
+          "src": "/photos/mexico/MEX05339.jpg",
+          "width": 1920,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAUEBgf/xAAmEAABAwMDBAIDAAAAAAAAAAABAAIDBAUREiExEyJBURRxFWGR/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABoRAAIDAQEAAAAAAAAAAAAAAAABAhEhEmH/2gAMAwEAAhEDEQA/AOeqqN4q+lDG47A/e2crbHaoXWR1WXSGYZ4xpbvwf2qE1vfUfFbHMxz4xolaNi3Pn68K9R2+GmhFKGZjI7geD7JRJpYVFXrPOgCR4/qLRXxxRV08cQc5jXkNIO3KIEXp73Aajtp21Ba3te4aSD7VD83E21TzdUCbQQ0E5Oo8IibV6CxURoYreyFjZes6TA1FucZREWtE9eH/2Q==",
+          "alt": "MEX05339",
+          "sourceFile": "MEX05339.tif",
+          "order": 4
+        },
+        {
+          "name": "MEX05027",
+          "src": "/photos/mexico/MEX05027.jpg",
+          "width": 1920,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAFwABAAMAAAAAAAAAAAAAAAAAAAMEBf/EACQQAAEEAQMDBQAAAAAAAAAAAAEAAgMRBBIhMQUTIhRBUWFx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDDh6jNGfENoCgD7BTukmyMMR5D6YbeHO2uvtVIu3Z9RYYRsW8gqTOzI34sUEIlbpu9TrFKKtHG5zAWtBH4ihbK9opr3AfAKKTaniYYXeAuis+LG72M6Wzsa4REFTPKIiQ//9k=",
+          "alt": "MEX05027",
+          "sourceFile": "MEX05027.jpg",
+          "order": 5
+        },
+        {
+          "name": "MEX05462",
+          "src": "/photos/mexico/MEX05462.jpg",
+          "width": 1920,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGQABAAIDAAAAAAAAAAAAAAAAAAIDAQQF/8QAJhAAAQQBAQcFAAAAAAAAAAAAAQACAxEEEgUUIjFBYaETITJR8P/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AOZBLJN6MJlLYoyQNIqu5UdpY0ePkQ/INe3U8X+5qEOZu0srzGHiQ6i3VQ5rGVkb9HLOW6XteKF3TSKrx5Q01nOAcQJHEdKRVWiksPA4g9UMrgxzBQDqsAfSIkI8B9zYPZERRf/Z",
+          "alt": "MEX05462",
+          "sourceFile": "MEX05462.tif",
+          "order": 6
+        },
+        {
+          "name": "MEX06073",
+          "src": "/photos/mexico/MEX06073.jpg",
+          "width": 1920,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGQABAAIDAAAAAAAAAAAAAAAAAAMEAQIG/8QAIBAAAgICAwADAQAAAAAAAAAAAQIAAwQREiExE0Fhsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A5y/H+MUgA83TZH7uZw8Q5VrJy4BRsnXkZD2Le5ZiHXQHfnUkwck4xewKWY+Hf9hUF1a1WvWW7U6MTVyXdmY7LHZMSC5l4NzWfKmrK3Ow6dyvZyVeIRlVfdj7/YiBFuIiB//Z",
+          "alt": "MEX06073",
+          "sourceFile": "MEX06073.tif",
+          "order": 7
+        },
+        {
+          "name": "MEX06145",
+          "src": "/photos/mexico/MEX06145.jpg",
+          "width": 1920,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAMFBAb/xAAkEAABAwMEAQUAAAAAAAAAAAABAAIDBBEhEhMxQVEFIiNh8f/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABkRAQACAwAAAAAAAAAAAAAAAAABMQIRgf/aAAwDAQACEQMRAD8A8qRzfkLTpIWsjD5I3F7xcZwB+KMMUdVNCymjIcG3k1PFj5IU6mrMnxsuIxz1qPlS25jVEskO4dA0t6GUXPf7KInWtG1kPp7HQN98biJXaSXZHeLALLqDHvO2RZgwMoiQZJIiKsv/2Q==",
+          "alt": "MEX06145",
+          "sourceFile": "MEX06145.tif",
+          "order": 8
+        },
+        {
+          "name": "MEX06138",
+          "src": "/photos/mexico/MEX06138.jpg",
+          "width": 1920,
+          "height": 2400,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGQABAQADAQAAAAAAAAAAAAAAAAUBAgYE/8QAJRAAAgICAQMDBQAAAAAAAAAAAQIAAwQhERJBUQUGMRQiYXHR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDllTuNjz/J68E0G57sliAg+0Lo89pWs9vWtUUV1rNajnuGJ3oyfkelZOPXyyIQy6AcE/uFTmsRmLMmz88HiJn6awaJQHx1RA6Fc/PsxX6mHSF4LgBRx3J/Mj3+o2t1Vhmaon4J514ERA1fOqZiVwMdR43ERA//2Q==",
+          "alt": "MEX06138",
+          "sourceFile": "MEX06138.tif",
+          "order": 9
+        },
+        {
+          "name": "MEX06221",
+          "src": "/photos/mexico/MEX06221.jpg",
+          "width": 1146,
+          "height": 1433,
+          "blurDataURL": "data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAYABMDASIAAhEBAxEB/8QAGgABAQACAwAAAAAAAAAAAAAAAAUBAgMGB//EACIQAAICAgEDBQAAAAAAAAAAAAECAAMEERIhMWEFBkFRsf/EABgBAAIDAAAAAAAAAAAAAAAAAAEDAAIE/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERAv/aAAwDAQACEQMRAD8A6qiNYwVRsk6E3vx7cdgLUKkjYlzL9v34bC/FIvRDvieh6fs4/UxdmV1WU1kpx2QR9+Yc5rhG1KQomSNHtqJUJ6U68lI1uSAjLSAVCsO6j48REZlxiyJfhlrnIcgE9uAMRE3QVEf/2Q==",
+          "alt": "MEX06221",
+          "sourceFile": "MEX06221.tif",
+          "order": 10
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "images": {
+    "MEX05027.jpg": {
+      "order": 5
+    },
+    "MEX05339.tif": {
+      "order": 4
+    },
+    "MEX05393.tif": {
+      "order": 0
+    },
+    "MEX05462.tif": {
+      "order": 6
+    },
+    "MEX06073.tif": {
+      "order": 7
+    },
+    "MEX06138.tif": {
+      "order": 9
+    },
+    "MEX06145.tif": {
+      "order": 8
+    },
+    "MEX06180.tif": {
+      "order": 2
+    },
+    "MEX06221.tif": {
+      "order": 10
+    },
+    "MEX06291.tif": {
+      "order": 1
+    },
+    "MEX06556.tif": {
+      "order": 3
+    }
+  }
+}
