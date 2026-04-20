@@ -23,8 +23,7 @@ export async function loadBlobGalleryManifest(): Promise<BlobGalleryManifest | n
 
   try {
     const result = await get(BLOB_GALLERIES_MANIFEST_PATH, {
-      access: "private",
-      useCache: false,
+      access: "public",
     });
 
     if (!result || result.statusCode !== 200) {
@@ -56,10 +55,11 @@ export async function saveBlobGalleryManifest(galleries: LocalGallery[]) {
       2
     ),
     {
-      access: "private",
+      access: "public",
       addRandomSuffix: false,
       allowOverwrite: true,
       contentType: "application/json",
+      cacheControlMaxAge: 60,
     }
   );
 }
