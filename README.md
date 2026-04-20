@@ -1,4 +1,4 @@
-# Diego Website Repo
+# Max and His Cam Website Repo
 
 This repository contains Diego Ortega's photography site in
 [`diegos_website/`](./diegos_website).
@@ -8,7 +8,8 @@ This repository contains Diego Ortega's photography site in
 - Next.js 15 App Router site
 - Local photo pipeline using `sharp`
 - Protected `/admin` workflow for uploads and ordering
-- Server-backed contact form
+- Vercel Blob-backed production uploads
+- Contact form with SMTP send support and mailto fallback
 
 ## Important deployment note
 
@@ -30,6 +31,10 @@ server-side features:
   [`diegos_website/app/(site)/portfolio/page.tsx`](./diegos_website/app/%28site%29/portfolio/page.tsx)
 
 For the current feature set, deploy on a Node-capable host such as Vercel.
+
+Current production alias:
+
+- `https://maxandhiscam.vercel.app`
 
 ## Local development
 

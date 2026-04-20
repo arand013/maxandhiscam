@@ -41,9 +41,9 @@ export default async function AdminPage({
     return <LoginScreen error={params.error} message={params.message} />;
   }
 
-  const galleries = getGalleries();
+  const galleries = await getGalleries();
   const galleryBySlug = new Map(galleries.map((gallery) => [gallery.slug, gallery.title]));
-  const images = getOrderedPortfolioImages().map((image) => ({
+  const images = (await getOrderedPortfolioImages()).map((image) => ({
     ...image,
     gallerySlug: image.gallerySlug ?? "",
     galleryTitle: shouldHideGalleryTitle(image.gallerySlug ?? "")

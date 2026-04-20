@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { FormEvent, useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import {
   initialContactFormState,
@@ -11,7 +11,21 @@ import {
  * Server-backed contact form. Sends directly from the app using configured
  * SMTP credentials, with lightweight client feedback for success and errors.
  */
-export function ContactForm() {
+export function ContactForm({
+  mode = "server",
+  recipient,
+}: {
+  mode?: "server" | "mailto";
+  recipient?: string;
+}) {
+  if (mode === "mailto") {
+    return <MailtoContactForm recipient={recipient} />;
+  }
+
+  return <ServerContactForm />;
+}
+
+function ServerContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, formAction] = useActionState(
     submitContactForm,
@@ -68,6 +82,90 @@ export function ContactForm() {
       >
         {state.message ??
           "Messages are sent directly from the site to your inbox."}
+      </p>
+    </form>
+  );
+}
+
+function MailtoContactForm({ recipient }: { recipient?: string }) {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [message, setMessage] = useState(
+    recipient
+      ? "Send opens your email app with the message filled in."
+      : "Add a contact email to enable the mailto fallback."
+  );
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!recipient) {
+      setMessage("No destination email is configured for this site yet.");
+      return;
+    }
+
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const body = String(formData.get("message") ?? "").trim();
+
+    if (!name || !email || !body) {
+      setMessage("Please complete all required fields.");
+      return;
+    }
+
+    const subject = encodeURIComponent(`Website inquiry from ${name}`);
+    const messageBody = encodeURIComponent(
+      [`Name: ${name}`, `Email: ${email}`, "", body].join("\n")
+    );
+
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${messageBody}`;
+    setMessage("Your email app should open with the message filled in.");
+    formRef.current?.reset();
+  }
+
+  return (
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-6 reveal"
+      aria-label="Contact form"
+    >
+      <Field label="Name" name="name" placeholder="Your Name..." required />
+      <Field
+        label="Email Address"
+        name="email"
+        type="email"
+        placeholder="Your Email Address..."
+        required
+      />
+      <Field
+        label="Message"
+        name="message"
+        placeholder="Your Message..."
+        textarea
+        required
+      />
+
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
+
+      <div className="pt-2">
+        <button
+          type="submit"
+          className="inline-flex items-center gap-3 border-b border-ink pb-1 text-sm uppercase tracking-widest hover:opacity-60 transition-opacity"
+        >
+          Send
+        </button>
+      </div>
+
+      <p aria-live="polite" className="text-xs max-w-sm text-stone-subtle">
+        {message}
       </p>
     </form>
   );

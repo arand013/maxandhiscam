@@ -34,7 +34,10 @@ export default function ContactRoute() {
             ) : null}
           </header>
 
-          {canSend ? <ContactForm /> : <ContactFallback email={recipient} />}
+          <ContactForm
+            mode={canSend ? "server" : "mailto"}
+            recipient={recipient}
+          />
 
           <div className="mt-8 border-t border-ink/10 pt-6 text-sm text-ink/70">
             {site.contact.location ? <p>{site.contact.location}</p> : null}
@@ -46,29 +49,6 @@ export default function ContactRoute() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function ContactFallback({ email }: { email?: string }) {
-  return (
-    <div className="space-y-4">
-      <p className="text-sm leading-relaxed text-ink/70">
-        The contact form is not configured on this deployment yet.
-      </p>
-      {email ? (
-        <a
-          href={`mailto:${email}`}
-          className="inline-flex items-center gap-3 border-b border-ink pb-1 text-sm uppercase tracking-widest hover:opacity-60 transition-opacity"
-        >
-          Email {email}
-        </a>
-      ) : (
-        <p className="text-sm leading-relaxed text-ink/70">
-          Add a contact email to <code className="font-mono">content/site.json</code> or
-          configure SMTP to enable direct messages.
-        </p>
-      )}
     </div>
   );
 }

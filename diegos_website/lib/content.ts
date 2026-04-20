@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { loadBlobGalleryManifest } from "@/lib/blob-gallery-store";
 
 const ROOT = process.cwd();
 
@@ -82,22 +83,33 @@ export function getSite(): SiteContent {
   };
 }
 
-export function getGalleries(): LocalGallery[] {
-  const data = safeRead<{ galleries?: LocalGallery[] }>(
-    "content/galleries.json",
-    { galleries: [] }
-  );
-  return (data.galleries ?? [])
+function getLocalGalleryData() {
+  return safeRead<{ galleries?: LocalGallery[] }>("content/galleries.json", {
+    galleries: [],
+  });
+}
+
+export async function getStoredGalleries(): Promise<LocalGallery[]> {
+  const remote = await loadBlobGalleryManifest();
+  if (remote) {
+    return remote.galleries ?? [];
+  }
+
+  return getLocalGalleryData().galleries ?? [];
+}
+
+export async function getGalleries(): Promise<LocalGallery[]> {
+  return (await getStoredGalleries())
     .filter((g) => g.visible !== false)
     .sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug));
 }
 
-export function getGallery(slug: string): LocalGallery | null {
-  return getGalleries().find((g) => g.slug === slug) ?? null;
+export async function getGallery(slug: string): Promise<LocalGallery | null> {
+  return (await getGalleries()).find((g) => g.slug === slug) ?? null;
 }
 
-export function getOrderedPortfolioImages(): LocalImage[] {
-  return getGalleries()
+export async function getOrderedPortfolioImages(): Promise<LocalImage[]> {
+  return (await getGalleries())
     .flatMap((gallery) =>
       gallery.images.map((image) => ({
         ...image,
@@ -115,9 +127,9 @@ export function getOrderedPortfolioImages(): LocalImage[] {
     );
 }
 
-export function getFeatured(): LocalGallery[] {
+export async function getFeatured(): Promise<LocalGallery[]> {
   const site = getSite();
-  const galleries = getGalleries();
+  const galleries = await getGalleries();
   const wanted = site.home.featured ?? [];
   if (wanted.length === 0) return galleries.slice(0, 3);
   const bySlug = new Map(galleries.map((g) => [g.slug, g]));

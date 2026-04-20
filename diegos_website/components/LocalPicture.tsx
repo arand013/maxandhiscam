@@ -25,6 +25,7 @@ export function LocalPicture({
   const protectedClassName = ["select-none pointer-events-none", className]
     .filter(Boolean)
     .join(" ");
+  const unoptimized = image.src.startsWith("http");
 
   if (fill) {
     return (
@@ -36,6 +37,7 @@ export function LocalPicture({
         priority={priority}
         placeholder="blur"
         blurDataURL={image.blurDataURL}
+        unoptimized={unoptimized}
         className={protectedClassName}
         draggable={false}
       />
@@ -55,6 +57,7 @@ export function LocalPicture({
       priority={priority}
       placeholder="blur"
       blurDataURL={image.blurDataURL}
+      unoptimized={unoptimized}
       className={protectedClassName}
       draggable={false}
     />

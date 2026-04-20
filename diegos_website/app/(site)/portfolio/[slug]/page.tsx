@@ -13,7 +13,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const gallery = getGallery(slug);
+  const gallery = await getGallery(slug);
   if (!gallery) return { title: "Gallery" };
   return {
     title: shouldHideGalleryTitle(gallery.slug) ? "Portfolio" : gallery.title,
@@ -27,7 +27,7 @@ export default async function GalleryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const gallery = getGallery(slug);
+  const gallery = await getGallery(slug);
   if (!gallery) notFound();
 
   const images = gallery.images;

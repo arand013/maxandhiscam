@@ -10,6 +10,7 @@
     "photos": "tsx scripts/photos.ts"
   },
   "dependencies": {
+    "@vercel/blob": "^2.3.3",
     "next": "15.5.15",
     "nodemailer": "^8.0.5",
     "react": "19.0.0",

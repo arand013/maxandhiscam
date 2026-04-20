@@ -4,6 +4,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import sharp from "sharp";
+import { getStoredGalleries } from "@/lib/content";
+import {
+  deleteGalleryBlob,
+  isBlobGalleryStoreConfigured,
+  isBlobUrl,
+  saveBlobGalleryManifest,
+  uploadGalleryBlob,
+} from "@/lib/blob-gallery-store";
 import {
   ensureDir,
   gallerySourceDir,
@@ -63,6 +72,12 @@ export async function uploadPhotosAction(formData: FormData) {
     redirect("/admin?error=Select+at+least+one+photo");
   }
 
+  if (isBlobGalleryStoreConfigured()) {
+    const savedCount = await uploadPhotosToBlob(slug, uploads);
+    refreshSite(slug);
+    redirect(`/admin?message=Uploaded+${savedCount}+photo${savedCount === 1 ? "" : "s"}`);
+  }
+
   const dir = gallerySourceDir(slug);
   ensureDir(dir);
 
@@ -104,6 +119,61 @@ export async function savePhotoOrderAction(
   photos: Array<{ slug: string; sourceFile: string }>
 ) {
   await requireAdmin();
+
+  if (isBlobGalleryStoreConfigured()) {
+    const galleries = await getStoredGalleries();
+    const ordered = sortManifestImages(galleries);
+    const expected = new Set(
+      ordered.map((photo) => `${photo.slug}:${photo.sourceFile}`)
+    );
+
+    const keys = photos.map((photo) => {
+      const slug = String(photo.slug ?? "");
+      const sourceFile = sanitizeSourceFile(String(photo.sourceFile ?? ""));
+      return `${slug}:${sourceFile}`;
+    });
+
+    if (
+      keys.length !== ordered.length ||
+      new Set(keys).size !== keys.length ||
+      keys.some((key) => !expected.has(key))
+    ) {
+      return {
+        ok: false,
+        message: "Could not save order. Refresh the page and try again.",
+      };
+    }
+
+    const nextBySlug = new Map(
+      galleries.map((gallery) => [
+        gallery.slug,
+        {
+          ...gallery,
+          images: gallery.images.map((image) => ({ ...image })),
+        },
+      ])
+    );
+
+    keys.forEach((key, index) => {
+      const [slug, sourceFile] = key.split(":");
+      const gallery = nextBySlug.get(slug);
+      const image = gallery?.images.find(
+        (item) => (item.sourceFile ?? path.basename(item.src)) === sourceFile
+      );
+
+      if (image) {
+        image.order = index;
+      }
+    });
+
+    await saveBlobGalleryManifest(Array.from(nextBySlug.values()));
+    refreshSite();
+
+    return {
+      ok: true,
+      message: "Photo order saved.",
+    };
+  }
 
   const ordered = getOrderedPhotos();
   const expected = new Set(
@@ -149,6 +219,60 @@ export async function deletePhotoAction(formData: FormData) {
 
   const slug = String(formData.get("slug") ?? "");
   const sourceFile = sanitizeSourceFile(String(formData.get("sourceFile") ?? ""));
+
+  if (isBlobGalleryStoreConfigured()) {
+    const galleries = await getStoredGalleries();
+    const gallery = galleries.find((item) => item.slug === slug);
+    const image = gallery?.images.find(
+      (item) => (item.sourceFile ?? path.basename(item.src)) === sourceFile
+    );
+
+    if (!gallery || !image) {
+      redirect("/admin?error=Photo+not+found");
+    }
+
+    const remainingImages = gallery.images.filter(
+      (item) => (item.sourceFile ?? path.basename(item.src)) !== sourceFile
+    );
+
+    if (isBlobUrl(image.src)) {
+      await deleteGalleryBlob(image.src);
+    }
+
+    const nextGalleries = galleries
+      .map((item) => {
+        if (item.slug !== slug) {
+          return item;
+        }
+
+        if (remainingImages.length === 0) {
+          return null;
+        }
+
+        const existingCoverSource =
+          item.cover.sourceFile ?? path.basename(item.cover.src);
+        const nextCover =
+          existingCoverSource === sourceFile
+            ? remainingImages[0]
+            : remainingImages.find(
+                (candidate) =>
+                  (candidate.sourceFile ?? path.basename(candidate.src)) ===
+                  existingCoverSource
+              ) ?? remainingImages[0];
+
+        return {
+          ...item,
+          cover: nextCover,
+          images: remainingImages,
+        };
+      })
+      .filter((item): item is NonNullable<typeof item> => Boolean(item));
+
+    await saveBlobGalleryManifest(nextGalleries);
+    refreshSite(slug);
+    redirect("/admin?message=Photo+removed");
+  }
+
   const dir = gallerySourceDir(slug);
   const filePath = path.join(dir, sourceFile);
 
@@ -310,4 +434,147 @@ function refreshSite(slug?: string) {
   if (slug) {
     revalidatePath(`/portfolio/${slug}`);
   }
+}
+
+async function uploadPhotosToBlob(slug: string, uploads: File[]) {
+  const galleries = await getStoredGalleries();
+  const existingGallery = galleries.find((gallery) => gallery.slug === slug);
+  const nextGalleryOrder =
+    galleries.reduce((max, gallery) => Math.max(max, gallery.order), -1) + 1;
+  let nextOrder =
+    galleries
+      .flatMap((gallery) => gallery.images)
+      .reduce((max, image) => Math.max(max, image.order ?? -1), -1) + 1;
+  const usedFiles = new Set(
+    (existingGallery?.images ?? []).map(
+      (image) => image.sourceFile ?? path.basename(image.src)
+    )
+  );
+  const nextImages = [...(existingGallery?.images ?? [])];
+  let savedCount = 0;
+
+  for (const upload of uploads) {
+    const image = await uploadPhotoToBlob(slug, upload, usedFiles, nextOrder);
+    if (!image) continue;
+
+    nextImages.push(image);
+    usedFiles.add(image.sourceFile ?? path.basename(image.src));
+    nextOrder += 1;
+    savedCount += 1;
+  }
+
+  if (savedCount === 0) {
+    redirect("/admin?error=No+supported+photos+were+uploaded");
+  }
+
+  const nextGallery = {
+    slug,
+    title: existingGallery?.title ?? titleFromSlug(slug),
+    location: existingGallery?.location,
+    year: existingGallery?.year,
+    description: existingGallery?.description,
+    order: existingGallery?.order ?? nextGalleryOrder,
+    visible: existingGallery?.visible ?? true,
+    cover: existingGallery?.cover ?? nextImages[0],
+    images: nextImages,
+  };
+
+  await saveBlobGalleryManifest([
+    ...galleries.filter((gallery) => gallery.slug !== slug),
+    nextGallery,
+  ]);
+
+  return savedCount;
+}
+
+async function uploadPhotoToBlob(
+  slug: string,
+  upload: File,
+  usedFiles: Set<string>,
+  order: number
+) {
+  const originalName = upload.name || "photo.jpg";
+  if (!ACCEPTED_IMAGE_EXT.test(originalName)) return null;
+
+  const baseName =
+    sanitizeFilename(path.basename(originalName, path.extname(originalName))) ||
+    `photo-${Date.now()}`;
+  const candidate = uniqueJpegName(baseName, usedFiles);
+  const sourceBuffer = Buffer.from(await upload.arrayBuffer());
+  const { data, info } = await sharp(sourceBuffer, { failOn: "none" })
+    .rotate()
+    .resize(2400, 2400, {
+      fit: "inside",
+      withoutEnlargement: true,
+    })
+    .jpeg({ quality: 85, progressive: true, mozjpeg: true })
+    .toBuffer({ resolveWithObject: true });
+  const blob = await uploadGalleryBlob(`photos/${slug}/${candidate}`, data);
+
+  return {
+    name: candidate.replace(/\.jpg$/i, ""),
+    src: blob.url,
+    width: info.width,
+    height: info.height,
+    blurDataURL: await makeBlurDataUrl(data),
+    alt: baseName.replace(/[-_]/g, " "),
+    sourceFile: candidate,
+    order,
+  };
+}
+
+async function makeBlurDataUrl(buffer: Buffer) {
+  const { data } = await sharp(buffer)
+    .resize(24, 24, { fit: "inside" })
+    .jpeg({ quality: 40 })
+    .toBuffer({ resolveWithObject: true });
+
+  return `data:image/jpeg;base64,${data.toString("base64")}`;
+}
+
+function uniqueJpegName(base: string, usedFiles: Set<string>) {
+  let candidate = `${base}.jpg`;
+  let counter = 1;
+
+  while (usedFiles.has(candidate)) {
+    candidate = `${base}-${counter}.jpg`;
+    counter += 1;
+  }
+
+  return candidate;
+}
+
+function sortManifestImages(
+  galleries: Awaited<ReturnType<typeof getStoredGalleries>>
+) {
+  return galleries
+    .flatMap((gallery) =>
+      gallery.images.map((image) => ({
+        slug: gallery.slug,
+        sourceFile: image.sourceFile ?? path.basename(image.src),
+        order:
+          typeof image.order === "number"
+            ? image.order
+            : Number.POSITIVE_INFINITY,
+        galleryOrder: gallery.order,
+        source: image.src,
+      }))
+    )
+    .sort(
+      (a, b) =>
+        a.order - b.order ||
+        a.galleryOrder - b.galleryOrder ||
+        a.slug.localeCompare(b.slug, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        }) ||
+        a.sourceFile.localeCompare(b.sourceFile, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        }) ||
+        a.source.localeCompare(b.source, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        })
+    );
 }

@@ -4,9 +4,9 @@ import { getOrderedPortfolioImages, getSite } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
+export default async function Page() {
   const site = getSite();
-  const images = getOrderedPortfolioImages();
+  const images = await getOrderedPortfolioImages();
 
   return (
     <div className="wrap pt-10 md:pt-16 pb-20">

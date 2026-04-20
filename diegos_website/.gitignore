@@ -11,3 +11,4 @@ out
 .sanity
 dist
 .vercel
+.env*.local
