@@ -1,4 +1,4 @@
-import { del, list, put } from "@vercel/blob";
+import { del, get, put } from "@vercel/blob";
 import type { LocalGallery } from "@/lib/content";
 
 export const BLOB_GALLERIES_MANIFEST_PATH = "site/galleries.json";
@@ -22,24 +22,18 @@ export async function loadBlobGalleryManifest(): Promise<BlobGalleryManifest | n
   }
 
   try {
-    const { blobs } = await list({
-      prefix: BLOB_GALLERIES_MANIFEST_PATH,
-      limit: 10,
+    const result = await get(BLOB_GALLERIES_MANIFEST_PATH, {
+      access: "private",
+      useCache: false,
     });
-    const manifestBlob =
-      blobs.find((blob) => blob.pathname === BLOB_GALLERIES_MANIFEST_PATH) ??
-      blobs[0];
 
-    if (!manifestBlob) {
+    if (!result || result.statusCode !== 200) {
       return null;
     }
 
-    const response = await fetch(manifestBlob.url, { cache: "no-store" });
-    if (!response.ok) {
-      return null;
-    }
-
-    return (await response.json()) as BlobGalleryManifest;
+    return JSON.parse(
+      await new Response(result.stream).text()
+    ) as BlobGalleryManifest;
   } catch (error) {
     console.error("Failed to load gallery manifest from Vercel Blob:", error);
     return null;
@@ -62,11 +56,10 @@ export async function saveBlobGalleryManifest(galleries: LocalGallery[]) {
       2
     ),
     {
-      access: "public",
+      access: "private",
       addRandomSuffix: false,
       allowOverwrite: true,
       contentType: "application/json",
-      cacheControlMaxAge: 60,
     }
   );
 }
