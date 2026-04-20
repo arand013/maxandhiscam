@@ -178,17 +178,50 @@ Everything in the nav, footer, hero overlay, and contact page is driven by
 
 ## Deploy
 
-Any Node host works — **Vercel** is easiest. This app is not a GitHub Pages
-site because it uses server rendering, server actions, SMTP mail delivery, and
-a writable `/admin` workflow.
+### GitHub
+
+GitHub is the right place to store the code and collaborate, but **GitHub Pages
+is not a compatible production host for the current app**.
+
+Why:
+
+- GitHub Pages is a static hosting service.
+- This app uses server-side features that require a Node runtime:
+  - cookies-based admin auth in `lib/admin-auth.ts`
+  - server actions in `app/admin/actions.ts` and `app/(site)/contact/actions.ts`
+  - SMTP mail delivery in `lib/mailer.ts`
+  - a writable `/admin` workflow that updates files on disk
+  - runtime redirects in `app/(site)/portfolio/page.tsx`
+
+Next.js static export also does not support important features this app relies
+on, including cookies, redirects, server actions, and the default image
+optimization pipeline.
+
+### Recommended production host
+
+Any Node host works. **Vercel** is the easiest path for the current feature set.
 
 1. Push to GitHub.
-2. Import in Vercel.
-3. Set `ADMIN_PASSWORD` and, if you want direct form delivery, the SMTP/contact
-   env vars above.
-4. Important: run `npm run photos` **before** pushing so `public/photos/` and
-   `content/galleries.json` are committed — or add a `prebuild` script to
-   run it during deploy if you'd rather keep raw sources in git.
+2. Import the repository into Vercel.
+3. Set `ADMIN_PASSWORD`.
+4. If you want direct contact form delivery, set the SMTP/contact env vars
+   listed above.
+5. Run `npm run photos` before pushing so `public/photos/` and
+   `content/galleries.json` are committed.
+
+### If you must use GitHub Pages
+
+You would need to convert the site to a static export build and give up or
+replace the current server-driven features. In practice that means removing or
+reworking:
+
+- `/admin`
+- direct SMTP sending from `/contact`
+- cookies-based auth
+- runtime redirects and other request-dependent behavior
+
+At that point the public portfolio pages could be deployed to Pages, but the
+current full app cannot.
 
 ## Project layout
 
