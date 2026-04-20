@@ -23,6 +23,13 @@ ADMIN_PASSWORD=choose-a-strong-password
 
 For local development, put it in `.env.local`.
 
+If the site is deployed on Vercel and you need to change the password later,
+edit:
+
+- Project Settings
+- Environment Variables
+- `ADMIN_PASSWORD`
+
 Then start the site:
 
 ```bash

@@ -86,6 +86,12 @@ The `/admin` route requires:
 Set it in `.env.local` for local development or in your host's environment
 variable settings for production.
 
+If you deploy on Vercel, edit it in:
+
+- Project Settings
+- Environment Variables
+- `ADMIN_PASSWORD`
+
 ## Adding or updating photos
 
 1. Drop image files into `photos/<gallery-slug>/`:
